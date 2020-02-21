@@ -27,4 +27,19 @@ public class AutoLoanService {
     public List<AutoLoanModel> getAllLoans() {
         return (List<AutoLoanModel>) this.autoLoanRepository.findAll();
     }
+
+    public Boolean removedLoan(int id) {
+        boolean state = true;
+        try {
+            this.autoLoanRepository.deleteById(id);
+        } catch (Exception e) {
+            state = false;
+        }
+        return state;
+    }
+
+    public AutoLoanModel update(int id, AutoLoanModel user){
+        user.setId(id);
+        return this.autoLoanRepository.save(user);
+    }
 }

@@ -1,8 +1,12 @@
 package com.example.banking.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AutoLoanModel {
 
     @Id
@@ -12,6 +16,8 @@ public class AutoLoanModel {
     private String clientId;
     private String name;
     private double balance;
+
+
 
     public int getId() {
         return id;
@@ -57,6 +63,42 @@ public class AutoLoanModel {
     }
 
     public AutoLoanModel() {
-        super();
+    }
+
+    public AutoLoanModel(String clientId, String name, double balance) {
+        this.clientId = clientId;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public static LoanBuilder builder() {
+        return new LoanBuilder();
+    }
+
+    public static final class LoanBuilder {
+
+        private AutoLoanModel autoLoanModel;
+
+        private LoanBuilder() {
+            autoLoanModel = new AutoLoanModel();
+        }
+        public LoanBuilder withClientId(String clientId){
+            autoLoanModel.setClientId(clientId);
+            return this;
+        }
+
+        public LoanBuilder withName(String name){
+            autoLoanModel.setName(name);
+            return this;
+        }
+
+        public LoanBuilder withBalance(double balance){
+            autoLoanModel.setBalance(balance);
+            return this;
+        }
+
+        public AutoLoanModel build() {
+            return autoLoanModel;
+        }
     }
 }

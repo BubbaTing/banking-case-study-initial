@@ -1,4 +1,7 @@
 # Banking Case Study
+* Chong Ting
+* Able to run three microservices(autoloan, credit card, and deposit). Was not able to get to Orchestrator.
+* Was stuck on fixing the update functionality parts. 
 
 You're going to create a banking application.  The banking application has the following lines of business (LoBs):
 
